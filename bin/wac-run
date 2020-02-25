@@ -8,4 +8,3 @@ if [[ $1 == *.py ]]; then
     exec python3 "$@" && exit
 fi
 exec "$@"
-
