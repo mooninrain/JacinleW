@@ -3,5 +3,4 @@
 JACROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )"/../ && pwd )"
 
 export CUDA_VISIBLE_DEVICES=$1 && shift
-$JACROOT/bin/jac-run "$@"
-
+$JACROOT/bin/wac-run "$@"
