@@ -59,6 +59,10 @@ class JacDataParallel(DataParallel):
             return self.module(*inputs[0], **kwargs[0])
         replicas = self.replicate(self.module, self.device_ids[:len(inputs)])
         outputs = self.parallel_apply(replicas, inputs, kwargs)
+        try:
+            assert all(map(lambda i: i.is_cuda, outputs))
+        except:
+            import pdb; pdb.set_trace()
         return self.gather(outputs, self.output_device)
 
     def scatter(self, inputs, kwargs, device_ids):
