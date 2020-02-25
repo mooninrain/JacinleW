@@ -50,7 +50,10 @@ def dict_gather(outputs, target_device, dim=0):
         if isinstance(out, Variable) or torch.is_tensor(out):
             if out.dim() == 0:
                 outputs = [o.unsqueeze(0) for o in outputs]
-            import pdb; pdb.set_trace()
+            try:
+                assert all(map(lambda i: i.is_cuda, outputs))
+            except:
+                import pdb; pdb.set_trace()
             return Gather.apply(target_device, dim, *outputs)
         elif out is None:
             return None
